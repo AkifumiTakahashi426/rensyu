@@ -1,4 +1,4 @@
-package jisyu;
+package jisyu1;
 
 import java.util.Scanner;
 
@@ -11,12 +11,9 @@ public class DoutGame {
 		}
 	}
 
-
 	public static void border() {
 		System.out.print("\n-----------------------------\n");
 	}
-
-
 
 	public static int decideNumber(String playerme) {
 
@@ -49,14 +46,13 @@ public class DoutGame {
 			if (yORn.equals("はい")) {
 				break;
 			} else {
+				border();
 				System.out.println("もう一度数字を入力します。");
 			}
 
 		}
 		return doutme;
 	}
-
-
 
 	public static int attack(String playerme, String playerTag, int doutTag) {
 
@@ -65,11 +61,12 @@ public class DoutGame {
 
 		Scanner scanner1 = new Scanner(System.in);
 		while (true) {
-			System.out.print(playerme + "さん、" + playerTag + "のダウトナンバーを当ててください（1～10）：");
+			border();
+			System.out.print(playerme + "さん、" + playerTag + "さんのダウトナンバーを当ててください（1～10）：");
 			if (scanner1.hasNextInt()) {
 				doutAtt = scanner1.nextInt();//入力待ち1
 				scanner1.nextLine();
-				break;
+
 			} else {
 				System.out.println("正しい値を入力してください");
 				scanner1.nextLine();
@@ -78,39 +75,18 @@ public class DoutGame {
 			if (doutAtt == doutTag) {
 				System.out.println("正解です！" + playerme + "さんの勝利です！");
 				result = 1;
+				break;
 			} else {
 
-			System.out.println("不正解です。");
-			doutAtt = 0;//ダウトナンバー初期化
-			System.out.println(playerTag + "さんのターンに移ります。");
-			result = 2;
-		}
+				System.out.println("不正解です。");
+				doutAtt = 0;//ダウトナンバー初期化
+				System.out.println(playerTag + "さんのターンに移ります。");
+				result = 2;
+				break;
+			}
 		}
 		return result;
 	}
-
-	/*			{
-					System.out.print(playerme + "さん、1から10の中から好きな数字を入力してください：");
-					doutme = scannerd1.nextInt();//入力待ち
-
-					if (doutme < 0 || 11 <= doutme) {
-						System.out.println("エラー！数字は1～10の間におさめてください");
-						while (0 >= doutme || doutme > 10) {
-							System.out.print(playerme + "さん、1から10の中から好きな数字を入力してください：");
-							doutme = scanner.nextInt();//入力待ち
-						}
-					}
-
-					System.out.print(player2 + "さんの数字は" + dout2 + "でよいですか？「はい」or「いいえ」：");
-					yORn = scanner_yorn.nextLine();//入力待ち
-
-					if (yORn.equals("はい")) {
-						break;
-					}
-
-				}*/
-
-//	}
 
 	public static void main(String[] args) {
 
@@ -120,25 +96,21 @@ public class DoutGame {
 		int dout1 = 0;
 		int dout2 = 0;
 		;
-		/*		String yORn = "";*/
 
 		Scanner scanner1 = new Scanner(System.in);
 		Scanner scanner2 = new Scanner(System.in);
-		/*		Scanner scannerd1 = new Scanner(System.in);
-				Scanner scannerd2 = new Scanner(System.in);
-				Scanner scanner_yorn = new Scanner(System.in);*/
 
 		//////////////////////////////////////ネーミングフェイズ
 
-		System.out.print("1人目のプレイヤーの名前を入力してください:");//ただの文章1
+		System.out.print("1人目のプレイヤーの名前を入力してください:");//指示する文章1
 		player1 = scanner1.nextLine();//入力待ち1
-		System.out.println("一人目のプレイヤーは「" + player1 + "」です。\n");
+		System.out.println("一人目のプレイヤーは「" + player1 + "」です。");
 
 		border();
 
-		System.out.print("二人目のプレイヤーの名前を入力してください:");//ただの文章1
+		System.out.print("二人目のプレイヤーの名前を入力してください:");//指示する文章1
 		player2 = scanner2.nextLine();//入力待ち1
-		System.out.println("二人目のプレイヤーは「" + player2 + "」です。\n");
+		System.out.println("二人目のプレイヤーは「" + player2 + "」です。");
 
 		border();
 
@@ -157,75 +129,19 @@ public class DoutGame {
 
 		////////////////////////////ゲームフェイズ
 
-		/*int dout11 = 0;//プレイヤー1が、プレイヤー2のダウトナンバーだと思う数字
-		Scanner scanner11 = new Scanner(System.in);
-		int dout22 = 0;//プレイヤー2が、プレイヤー1のダウトナンバーだと思う数字
-		Scanner scanner22 = new Scanner(System.in);
-		*/
 		System.out.println("ではゲームを始めましょう。");
 
-		///////////////////////////////////////////////////////////////
-
-		int result = 2;//攻撃の結果を入れる箱
+		int result = 2;//攻撃の結果を入れる箱（初期値２、攻撃成功で１になる）
 		while (result == 2) {
-			attack(player1, player2, dout2);
-			if (result == 2) {
+			result = attack(player1, player2, dout2);
+			if (result == 1) {
 				break;
 			} else {
-				attack(player2, player1, dout1);
+				result = attack(player2, player1, dout1);
 			}
 		}
-		/*		while (dout11 != dout2 && dout22 != dout1) {
 
-					System.out.print(player1 + "さん、" + player2 + "さんのダウトナンバーを当ててください（1～10）：");
-					dout11 = scanner11.nextInt();//入力待ち1
-
-					if (dout11 < 0 || 11 <= dout11) {
-						System.out.println("エラー！数字は1～10の間におさめてください");
-						while (0 >= dout11 || dout11 > 10) {
-							System.out.print(player1 + "さん、" + player2 + "さんのダウトナンバーを当ててください（1～10）：");
-							dout11 = scanner11.nextInt();//入力待ち
-						}
-					}
-
-					border();
-
-					if (dout11 == dout2) {
-						System.out.println("正解です！" + player1 + "さんの勝利です！");
-
-					} else {
-						System.out.println("不正解です。");
-						dout11 = 0;//ダウトナンバー初期化
-						System.out.println(player2 + "さんのターンです。");
-
-						System.out.print(player2 + "さん、" + player1 + "さんのダウトナンバーを当ててください（1～10）：");
-						dout22 = scanner22.nextInt();//入力待ち1
-
-						if (dout22 < 0 || 11 <= dout22) {
-							System.out.println("エラー！数字は1～10の間におさめてください");
-							while (0 >= dout22 || dout22 > 10) {
-								System.out.print(player2 + "さん、" + player1 + "さんのダウトナンバーを当ててください（1～10）：");
-								dout22 = scanner22.nextInt();//入力待ち
-							}
-						}
-
-						////////////////////////////////////////////////////
-
-						border();
-
-						if (dout22 == dout1) {
-							System.out.println("正解です！" + player2 + "さんの勝利です！");
-
-						} else {
-							System.out.println("不正解です。");
-							dout22 = 0;
-							System.out.println(player1 + "さんのターンです。");
-
-						}
-
-					}
-				}*/
-
+		border();
 		System.out.print("ゲームを終了します。お疲れさまでした。");
 
 	}
