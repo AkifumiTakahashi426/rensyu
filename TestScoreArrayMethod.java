@@ -68,7 +68,7 @@ public class TestScoreArrayMethod {
 	public static void main(String[] args) {
 		int num = 5;//教科数決定
 		int testScores[] = randMethod(num);
-		int scoreSum = sumMethod(testScores);//配列を送るときは[]はいらないの？
+		int scoreSum = sumMethod(testScores);//配列を送るときは[]はいらないの？→いらないよ。p117参照
 		double scoreAvg = avgMethod(scoreSum, testScores);
 		int max = maxMethod(testScores);
 		//int maxNumber = maxNumberMethod(testScores);
