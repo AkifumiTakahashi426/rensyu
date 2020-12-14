@@ -44,7 +44,7 @@ public class E_card {
 
 	}
 
-	public static void slvWin(String player1,String player2) {
+	public static void slvWin(String player1, String player2) {
 
 		white();
 
@@ -107,7 +107,7 @@ public class E_card {
 		System.out.println("　　　　　　　＞　　　　　　 　　　￣＜　　　　　　　");
 		System.out.println("　　　　 -=ﾆ　　　　　　 　 　 　 　 　 ｀ゝ　　　　　　　　　　");
 		System.out.println("　　　　 ∠´　 　,.ｨ　 ﾊ　　　　 　　　　 `、　　　　土下座しろ・・・");
-		System.out.println("　　　　　/ 　　/　| ./　ヽ　 ﾄ､　　　　 　 |　　　　　　　"+player2+"・・・っ！！　　");
+		System.out.println("　　　　　/ 　　/　| ./　ヽ　 ﾄ､　　　　 　 |　　　　　　　" + player2 + "・・・っ！！　　");
 		System.out.println("　　　　 lイ　/''-ﾆ|/､　r‐＼lﾆ＼!　__　 　|");
 		System.out.println("　　 　 　 'l.ｲ| ＝=｡､i　''==｡=＝ l. l'ｌ| 　 |　　　　");
 		System.out.println("　 　 　 　　 |l| `ー'/　 u　ｰ‐'''　| |'ｌ|　 ｜　　　　");
@@ -192,7 +192,12 @@ public class E_card {
 				System.out.print("入力してください（奴隷か平民)：");
 				slvSet = scanner.nextLine();
 				if (slvSet.equals("奴隷") || slvSet.equals("平民")) {
-					break;
+					if (slvSet == "平民" && slvCom <= 0) {
+						System.out.println("平民カードはもうありません");
+					} else {
+						break;
+					}
+					
 
 				} else {
 					System.out.println("------------------------------------------");
@@ -200,6 +205,9 @@ public class E_card {
 					System.out.println("------------------------------------------");
 
 				}
+
+				
+
 			}
 
 			System.out.print(player1 + "さんの出すカードは「" + slvSet + "」でよろしいですか？「はい」or「いいえ」：");
@@ -231,14 +239,20 @@ public class E_card {
 				System.out.print("入力してください（皇帝か平民)：");
 				empSet = scanner.nextLine();
 				if (empSet.equals("皇帝") || empSet.equals("平民")) {
-					break;
-
+					if (empSet == "平民" && empCom <= 0) {
+						System.out.println("平民カードはもうありません");
+					} else {
+						break;
+					}
+					
+					
 				} else {
 					System.out.println("------------------------------------------");
 					System.out.println("エラー！入力は「皇帝」か「平民」のみを受け付けます。");
 					System.out.println("------------------------------------------");
 
 				}
+
 			}
 
 			System.out.print(player2 + "さんの出すカードは「" + empSet + "」でよろしいですか？「はい」or「いいえ」：");
@@ -317,7 +331,7 @@ public class E_card {
 		while (true) {
 			judge = setMethod(player1, player2, slvCom, empCom);
 			if (judge == 1) {
-				slvWin(player1,player2);
+				slvWin(player1, player2);
 				break;
 			} else if (judge == 2) {
 				empWin(player2);
